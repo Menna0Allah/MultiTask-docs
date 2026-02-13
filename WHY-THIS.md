@@ -35,25 +35,10 @@ Public, portfolio‑ready documentation for the MultiTask platform. This reposit
   SVG diagrams used in `docs/architecture.md` and `docs/index.md`. These visualize system design and flows.
 - `assets/screenshots/`  
   Full UI screenshot set. Referenced in `docs/screenshots.md` and selectively in `docs/index.md`.
-- `mkdocs.yml`  
-  MkDocs configuration for generating the public documentation site.
 
 ## Screenshots
 All screenshots are in `assets/screenshots/` and are indexed in `docs/screenshots.md`. This keeps the documentation fully browsable without accessing the private repository.
 
-## How to Preview Locally
-```bash
-pip install mkdocs mkdocs-material
-mkdocs serve
-```
-
-## Publish to GitHub Pages
-Deployment is manual.
-
-Setup steps:
-1. Update `repo_url` in `mkdocs.yml` with your real GitHub repo URL.
-2. Build the site locally with `mkdocs build`.
-3. Publish the generated site manually to your preferred Pages branch or hosting target.
 
 ## Contribution / Update Rules
 - Keep `README.md` and `docs/*.md` consistent.
