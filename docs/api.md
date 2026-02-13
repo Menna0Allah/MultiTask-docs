@@ -1,19 +1,25 @@
-# API
+# API Reference
 
 Base URL: `http://localhost:8000/api`
 
-This page documents the public backend surface by domain. It mirrors the canonical inventory in `DOCUMENTATION.md`.
+This page summarizes the public backend surface by domain, with authentication expectations and representative examples.
 
-## Auth
-Purpose: identity, session lifecycle, and profile management.
+## Authentication and Session
 
-Main endpoints:
+### Purpose
+
+Identity, account lifecycle, profile updates, and token refresh.
+
+### Key Endpoints
+
 - `POST /auth/register/`
 - `POST /auth/login/`
 - `POST /auth/token/refresh/`
 - `POST /auth/logout/`
 - `GET|PUT /auth/profile/`
-Additional endpoints:
+
+### Additional Endpoints
+
 - `POST /auth/token/`
 - `POST /auth/profile/change-password/`
 - `GET /auth/users/`
@@ -30,11 +36,13 @@ Additional endpoints:
 - `GET|PUT|DELETE /auth/portfolio/<id>/`
 - `GET /auth/users/<username>/portfolio/`
 
-Auth rules:
-- Public for registration/login/token refresh.
-- JWT required for profile and logout.
+### Access Rules
 
-Example:
+- Public: register, login, verify, password reset, username/email checks.
+- JWT required: profile, logout, portfolio management, account deletion.
+
+### Example
+
 ```http
 POST /api/auth/login/
 Content-Type: application/json
@@ -44,24 +52,35 @@ Content-Type: application/json
   "password": "StrongPass123"
 }
 ```
+
 ```json
 {
   "access": "<jwt_access>",
   "refresh": "<jwt_refresh>",
-  "user": {"username": "sara", "is_client": true, "is_freelancer": true}
+  "user": {
+    "username": "sara",
+    "is_client": true,
+    "is_freelancer": true
+  }
 }
 ```
 
-## Tasks
-Purpose: task listing, creation, applications, status transitions, and reviews.
+## Tasks and Applications
 
-Main endpoints:
+### Purpose
+
+Marketplace listing, task creation, applications, acceptance, completion, cancellation, reviews, and saved tasks.
+
+### Key Endpoints
+
 - `GET /tasks/`
 - `POST /tasks/create/`
-- `POST /tasks/{id}/apply/`
-- `POST /tasks/applications/{id}/accept/`
-- `POST /tasks/{id}/complete/`
-Additional endpoints:
+- `POST /tasks/<id>/apply/`
+- `POST /tasks/applications/<id>/accept/`
+- `POST /tasks/<id>/complete/`
+
+### Additional Endpoints
+
 - `GET /tasks/categories/`
 - `GET /tasks/my-tasks/`
 - `GET /tasks/<id>/`
@@ -81,11 +100,14 @@ Additional endpoints:
 - `GET /tasks/<id>/saved/`
 - `DELETE /tasks/saved/<id>/`
 
-Auth rules:
-- Browsing is public.
-- Creating/applying/updating lifecycle requires JWT and role/ownership checks.
+### Access Rules
 
-Example:
+- Public: browse tasks, categories, details.
+- JWT + role checks: create/apply/accept/reject/complete/cancel/review.
+- Ownership checks apply to update/delete and application review actions.
+
+### Example
+
 ```http
 POST /api/tasks/42/apply/
 Authorization: Bearer <access_token>
@@ -96,6 +118,7 @@ Content-Type: application/json
   "bid_amount": "120.00"
 }
 ```
+
 ```json
 {
   "application_id": 308,
@@ -105,52 +128,65 @@ Content-Type: application/json
 ```
 
 ## Messaging
-Purpose: conversations, messages, read state, and message stats.
 
-Main endpoints:
+### Purpose
+
+Conversation lifecycle, message creation, read state, and messaging statistics.
+
+### Key Endpoints
+
 - `GET /messaging/conversations/`
 - `POST /messaging/conversations/create/`
-- `GET /messaging/conversations/{id}/messages/`
-- `POST /messaging/conversations/{id}/messages/send/`
-Additional endpoints:
+- `GET /messaging/conversations/<id>/messages/`
+- `POST /messaging/conversations/<id>/messages/send/`
+
+### Additional Endpoints
+
 - `GET /messaging/conversations/<id>/`
 - `POST /messaging/conversations/<id>/mark-read/`
 - `GET /messaging/statistics/`
 
-Auth rules:
-- JWT required for all messaging routes.
-- Conversation access is participant-scoped.
+### Access Rules
 
-Example:
-```http
-POST /api/messaging/conversations/99/messages/send/
-Authorization: Bearer <access_token>
-Content-Type: application/json
+- JWT required for all messaging endpoints.
+- Access is restricted to conversation participants.
 
-{
-  "content": "Draft uploaded. Please review."
-}
-```
-```json
-{
-  "message_id": 771,
-  "conversation_id": 99,
-  "sender": "freelancer_user",
-  "content": "Draft uploaded. Please review.",
-  "created_at": "2026-02-10T16:32:00Z"
-}
-```
+## Notifications
+
+### Purpose
+
+Notification inbox, unread counters, deletion, and preference management.
+
+### Endpoints
+
+- `GET /notifications/`
+- `GET /notifications/unread-count/`
+- `POST /notifications/<id>/read/`
+- `DELETE /notifications/<id>/delete/`
+- `POST /notifications/mark-all-read/`
+- `DELETE /notifications/clear-all/`
+- `GET|PUT /notifications/preferences/`
+
+### Access Rules
+
+- JWT required for all notification operations.
 
 ## Payments
-Purpose: connected account onboarding, escrow operations, wallet, and withdrawals.
 
-Main endpoints:
+### Purpose
+
+Connected account onboarding, payment intents, escrow release/refund, wallet ledger, and withdrawals.
+
+### Key Endpoints
+
 - `POST /payments/connect/create/`
 - `POST /payments/connect/onboarding/`
 - `POST /payments/intents/create/`
-- `POST /payments/escrow/{id}/release/`
+- `POST /payments/escrow/<id>/release/`
 - `GET /payments/wallet/transactions/`
-Additional endpoints:
+
+### Additional Endpoints
+
 - `GET /payments/connect/status/`
 - `GET /payments/escrow/<id>/`
 - `POST /payments/escrow/<id>/refund/`
@@ -163,39 +199,23 @@ Additional endpoints:
 - `POST /payments/payment-methods/<id>/set-default/`
 - `POST /payments/webhooks/stripe/`
 
-Auth rules:
-- JWT required for all payment operations except webhook receiver.
-- Webhooks (`/payments/webhooks/stripe/`) are provider-authenticated.
+### Access Rules
 
-Example:
-```http
-POST /api/payments/intents/create/
-Authorization: Bearer <access_token>
-Content-Type: application/json
-
-{
-  "task_id": 42,
-  "amount": "200.00",
-  "currency": "usd"
-}
-```
-```json
-{
-  "intent_id": "pi_...",
-  "client_secret": "pi_..._secret_...",
-  "status": "requires_payment_method"
-}
-```
+- JWT required for user payment actions.
+- `POST /payments/webhooks/stripe/` is provider-authenticated.
 
 ## Recommendations
-Purpose: personalized task ranking and freelancer discovery.
 
-Main endpoints:
+### Purpose
+
+Task ranking, freelancer discovery, and preference/profile tuning.
+
+### Endpoints
+
 - `GET /recommendations/tasks/`
 - `GET /recommendations/freelancers/`
 - `GET|PUT /recommendations/preferences/`
 - `POST /recommendations/onboarding/`
-Additional endpoints:
 - `GET /recommendations/service-offerings/`
 - `GET /recommendations/freelancers/<task_id>/`
 - `GET /recommendations/onboarding/status/`
@@ -204,10 +224,19 @@ Additional endpoints:
 - `POST /recommendations/skills/update/`
 - `GET /recommendations/categories/`
 
-## Chatbot
-Purpose: AI chatbot sessions, messaging, and task extraction.
+### Access Rules
 
-Main endpoints:
+- Personalized feeds and preferences require JWT.
+- Some taxonomy/catalog endpoints may be public.
+
+## Chatbot
+
+### Purpose
+
+Assistant sessions, chat exchange, suggested categories, and structured task extraction.
+
+### Endpoints
+
 - `GET /chatbot/sessions/`
 - `GET /chatbot/sessions/<id>/`
 - `POST /chatbot/sessions/<id>/end/`
@@ -218,30 +247,26 @@ Main endpoints:
 - `GET /chatbot/status/`
 - `GET /chatbot/statistics/`
 
-Auth rules:
-- JWT required for personalized feeds and preferences.
-- Some catalog endpoints are public.
+## Integration Notes
 
-Example:
-```http
-GET /api/recommendations/tasks/
-Authorization: Bearer <access_token>
-```
-```json
-{
-  "results": [
-    {"task_id": 56, "match_score": 0.91, "reason": "Python + API integration history"}
-  ]
-}
-```
-## Notifications
-Purpose: notification inbox and preferences.
+- Prefer token refresh flow over forcing relogin on access expiration.
+- Treat payment updates as asynchronous and webhook-confirmed.
+- Re-fetch canonical resources after realtime events to ensure consistency.
 
-Main endpoints:
-- `GET /notifications/`
-- `GET /notifications/unread-count/`
-- `POST /notifications/<id>/read/`
-- `DELETE /notifications/<id>/delete/`
-- `POST /notifications/mark-all-read/`
-- `DELETE /notifications/clear-all/`
-- `GET|PUT /notifications/preferences/`
+## UI Evidence
+
+| API Domain | Preview |
+|---|---|
+| Auth | ![Login](../assets/screenshots/login-page.png) |
+| Tasks | ![Task detail](../assets/screenshots/first-part-specific-task-page.png) |
+| Messaging | ![Messages](../assets/screenshots/messages-conversation-page.png) |
+| Notifications | ![Notifications](../assets/screenshots/notifications-page.png) |
+| Payments | ![Wallet](../assets/screenshots/wallet-page.png) |
+| Recommendations | ![Recommendations](../assets/screenshots/first-part-recommendations-page.png) |
+
+## Related Pages
+
+- [Features](features.md)
+- [Realtime](realtime.md)
+- [Payments](payments.md)
+- [Security](security.md)

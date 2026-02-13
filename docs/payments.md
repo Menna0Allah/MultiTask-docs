@@ -1,34 +1,70 @@
 # Payments
 
-## Model
-MultiTask uses an escrow-style flow: funds are authorized/held, delivery is completed, then release occurs after client confirmation.
+This page documents the escrow-centered payment model, connected-account onboarding, and payout flow.
 
-## Stripe Connect Role
-Stripe Connect is used for:
-- Connected account onboarding for freelancers.
-- Payout routing.
-- Payment intents and transaction lifecycle.
-- Webhook-driven status synchronization.
+## Payment Model
 
-## Payment Flow
-1. Client accepts freelancer application.
-2. Client funds payment intent linked to the task.
-3. Funds are held in escrow context.
-4. Freelancer completes delivery.
-5. Client marks task complete.
-6. Platform triggers escrow release.
-7. Freelancer withdraws according to payout availability.
+MultiTask uses an escrow-style lifecycle:
 
-## Fees
+1. Client accepts a freelancer.
+2. Client funds payment intent for the task.
+3. Funds remain in escrow context while work is delivered.
+4. Client confirms completion.
+5. Platform releases eligible funds.
+6. Freelancer withdraws available balance.
+
+## Provider Integration
+
+Stripe Connect is currently used for:
+
+- Freelancer connected account onboarding.
+- Payment intent creation and tracking.
+- Escrow release and refund operations.
+- Webhook-driven payment status synchronization.
+
+## Commercial Split
+
 - Platform fee: 15%
-- Freelancer receives: 85%
+- Freelancer share: 85%
 
-## Current Limitations
-- Regional optimization is still in progress.
-- Stripe is the active provider for current milestone delivery.
-- Egypt-focused provider support is planned for better local compatibility.
+## API Touchpoints
 
-## Operational Notes
-- Refund and release paths are explicit backend actions.
-- Payment events should be treated as asynchronous and webhook-confirmed.
-- Webhook endpoint: `/payments/webhooks/stripe/` (provider-authenticated).
+- `POST /payments/connect/create/`
+- `POST /payments/connect/onboarding/`
+- `GET /payments/connect/status/`
+- `POST /payments/intents/create/`
+- `GET /payments/escrow/<id>/`
+- `POST /payments/escrow/<id>/release/`
+- `POST /payments/escrow/<id>/refund/`
+- `GET /payments/wallet/`
+- `GET /payments/wallet/transactions/`
+- `GET /payments/withdrawals/`
+- `POST /payments/withdrawals/create/`
+- `POST /payments/webhooks/stripe/`
+
+## Operational Controls
+
+- Treat payment status as asynchronous until webhook confirmation.
+- Keep release and refund actions explicit and auditable.
+- Restrict payment actions by role and task ownership constraints.
+- Record transaction events in wallet history for user transparency.
+
+## Current Scope and Limitations
+
+- Stripe is the active milestone provider.
+- Regional optimization is in progress.
+- Egypt-focused provider support is planned for broader local compatibility.
+
+## UI Evidence
+
+| Payment Surface | Preview |
+|---|---|
+| Wallet | ![Wallet](../assets/screenshots/wallet-page.png) |
+| Transactions | ![Transactions](../assets/screenshots/transactions-page.png) |
+| Payment details | ![Payment details](../assets/screenshots/payment-details-to-specific-task-page.png) |
+
+## Related Pages
+
+- [API](api.md)
+- [Security](security.md)
+- [Features](features.md)

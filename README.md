@@ -18,6 +18,30 @@ A comprehensive task marketplace platform connecting clients with freelancers, b
 |--------|---------------|
 | ![Wallet](assets/screenshots/wallet-page.png) | ![Notifications](assets/screenshots/notifications-page.png) |
 
+| Tasks Feed | Recommendations |
+|------------|-----------------|
+| ![Tasks Feed](assets/screenshots/first-part-tasks-page.png) | ![Recommendations](assets/screenshots/first-part-recommendations-page.png) |
+
+| Freelancer Directory | Profile |
+|----------------------|---------|
+| ![Freelancers](assets/screenshots/first-part-freelancers-page.png) | ![Profile](assets/screenshots/profile-page.png) |
+
+| Login | Register |
+|-------|----------|
+| ![Login](assets/screenshots/login-page.png) | ![Register](assets/screenshots/register-page.png) |
+
+| Transactions | Payment Details |
+|--------------|-----------------|
+| ![Transactions](assets/screenshots/transactions-page.png) | ![Payment Details](assets/screenshots/payment-details-to-specific-task-page.png) |
+
+| FAQ | About |
+|-----|-------|
+| ![FAQ](assets/screenshots/faq-page.png) | ![About](assets/screenshots/about-page.png) |
+
+| 404 | 500 |
+|-----|-----|
+| ![404](assets/screenshots/not-found-404-page.png) | ![500](assets/screenshots/server-error-500-page.png) |
+
 ---
 
 ## Table of Contents

@@ -1,39 +1,87 @@
 # Security
 
-## Authentication Strategy
-- JWT-based auth with short-lived access token and longer-lived refresh token.
+This page summarizes authentication, authorization, data handling, and security posture expectations for MultiTask.
+
+## Authentication Model
+
+- JWT-based access and refresh tokens.
 - Access token lifetime: 60 minutes.
 - Refresh token lifetime: 7 days.
-- Refresh endpoint rotates/renews access for active sessions.
+- Session continuity via refresh endpoint.
 
 ## Login Methods
-- Email/username + password.
-- Google OAuth (social login).
+
+- Email or username with password.
+- Google OAuth social login.
 
 ## Password Policy
+
 - Minimum 8 characters.
 - At least one uppercase letter.
-- At least one number.
+- At least one numeric digit.
+
+## Authorization Strategy
+
+- Protected API routes require `Authorization: Bearer <token>`.
+- Role checks enforce `client`, `freelancer`, and `both` boundaries.
+- Ownership checks restrict task mutation and sensitive resource access.
+- WebSocket subscriptions validate identity and conversation membership.
 
 ## Token Storage Decision
+
 Current frontend stores tokens in `localStorage`.
 
-Trade-offs:
-- Pros: simple implementation and clear SPA session handling.
-- Cons: higher XSS exposure than HttpOnly cookie strategy.
-- Mitigations: strict input sanitization, dependency hygiene, and CSP hardening.
+### Trade-offs
 
-## Route and Data Protection
-- Protected API routes require `Authorization: Bearer <token>`.
-- Role and ownership checks enforce client/freelancer boundaries.
-- Realtime channels validate authenticated identity and membership before subscription.
+- Advantage: simple SPA session lifecycle.
+- Risk: higher exposure under XSS than HttpOnly cookie strategy.
 
-## Secrets Handling
-- Secrets are injected via environment variables.
-- Public docs expose only `.env.example` patterns, never real values.
-- Keys to protect: Django secret, DB credentials, Stripe secrets, Gemini key, email credentials.
+### Mitigations
 
-## PII Handling
-- Profile and payment-related user data is treated as sensitive.
-- Access is restricted to authenticated owners and authorized platform actions.
-- Logs/analytics should avoid storing raw secrets and unnecessary personal fields.
+- Strict input and output sanitization.
+- Dependency auditing and patch hygiene.
+- Content Security Policy hardening.
+- Centralized auth guards and route checks.
+
+## Secrets and Configuration
+
+- Secrets are environment-injected.
+- Public docs include placeholders only.
+- Never commit real credentials.
+
+Sensitive keys include:
+
+- Django secret key
+- Database credentials
+- Stripe secret and webhook secret
+- Gemini API key
+- Email provider credentials
+
+## Data Handling Principles
+
+- Treat profile and payment-related fields as sensitive.
+- Limit access to owners and authorized service actions.
+- Avoid logging secrets or unnecessary personal data.
+- Preserve auditability for payment-impacting state changes.
+
+## Hardening Checklist
+
+- Enable strict CSP and security headers in production.
+- Add rate limiting for auth and password-reset endpoints.
+- Enforce HTTPS for all environments beyond local dev.
+- Rotate secrets and revoke compromised tokens quickly.
+- Monitor authentication anomalies and suspicious webhook calls.
+
+## UI Evidence
+
+| Security-Relevant Surface | Preview |
+|---|---|
+| Login | ![Login](../assets/screenshots/login-page.png) |
+| Register | ![Register](../assets/screenshots/register-page.png) |
+| Profile settings | ![Profile](../assets/screenshots/profile-page.png) |
+
+## Related Pages
+
+- [API](api.md)
+- [Realtime](realtime.md)
+- [Payments](payments.md)
