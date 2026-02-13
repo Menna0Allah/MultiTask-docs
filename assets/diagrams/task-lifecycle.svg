@@ -1,0 +1,57 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1020"/>
+      <stop offset="100%" stop-color="#122033"/>
+    </linearGradient>
+    <style>
+      .title { font: 600 44px "Segoe UI", Arial, sans-serif; fill: #f8fafc; }
+      .step { font: 600 22px "Segoe UI", Arial, sans-serif; fill: #e2e8f0; }
+      .small { font: 500 18px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+      .node { fill: #111827; stroke: #7c8ca5; stroke-width: 2; rx: 16; ry: 16; }
+      .line { stroke: #cbd5e1; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .note { font: 600 18px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#cbd5e1" />
+    </marker>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)" />
+  <text x="80" y="90" class="title">Task Lifecycle</text>
+
+  <rect x="120" y="220" width="260" height="120" class="node" />
+  <text x="150" y="285" class="step">Posted</text>
+
+  <rect x="430" y="220" width="260" height="120" class="node" />
+  <text x="470" y="285" class="step">Applied</text>
+
+  <rect x="740" y="220" width="260" height="120" class="node" />
+  <text x="770" y="285" class="step">Accepted</text>
+
+  <rect x="1050" y="220" width="260" height="120" class="node" />
+  <text x="1070" y="285" class="step">In Progress</text>
+
+  <rect x="1050" y="500" width="260" height="120" class="node" />
+  <text x="1070" y="565" class="step">Completed</text>
+  <text x="1070" y="595" class="small">Client marks done</text>
+
+  <rect x="1360" y="500" width="220" height="120" class="node" />
+  <text x="1385" y="565" class="step">Reviewed</text>
+
+  <rect x="740" y="500" width="260" height="120" class="node" />
+  <text x="770" y="565" class="step">Cancelled</text>
+
+  <path d="M380 280 L430 280" class="line" />
+  <path d="M690 280 L740 280" class="line" />
+  <path d="M1000 280 L1050 280" class="line" />
+
+  <path d="M1180 340 L1180 500" class="line" />
+  <text x="1195" y="425" class="note">Complete</text>
+
+  <path d="M1310 560 L1360 560" class="line" />
+  <text x="1315" y="535" class="note">Review</text>
+
+  <path d="M1180 340 L870 500" class="line" />
+  <text x="980" y="435" class="note">Cancel</text>
+</svg>

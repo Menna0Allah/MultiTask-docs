@@ -1,0 +1,79 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#152236"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1b2a44"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 46px "Segoe UI", Arial, sans-serif; fill: #f8fafc; }
+      .subtitle { font: 500 22px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+      .layer { font: 600 22px "Segoe UI", Arial, sans-serif; fill: #e2e8f0; }
+      .node { fill: url(#panel); stroke: #90a4bf; stroke-width: 2.5; rx: 16; ry: 16; }
+      .label { font: 600 22px "Segoe UI", Arial, sans-serif; fill: #e5e7eb; }
+      .small { font: 500 18px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+      .line { stroke: #cbd5e1; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 6 6; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#cbd5e1" />
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1100" fill="url(#bg)" />
+  <text x="80" y="90" class="title">MultiTask System Architecture</text>
+  <text x="80" y="130" class="subtitle">Public documentation overview</text>
+
+  <text x="80" y="200" class="layer">Client Layer</text>
+  <rect x="80" y="230" width="560" height="180" class="node" />
+  <text x="120" y="300" class="label">User Browser</text>
+  <text x="120" y="335" class="small">Web + Mobile</text>
+
+  <text x="80" y="470" class="layer">Frontend</text>
+  <rect x="80" y="500" width="560" height="180" class="node" />
+  <text x="120" y="570" class="label">React + Vite</text>
+  <text x="120" y="605" class="small">SPA UI, auth, state, routing</text>
+
+  <text x="80" y="740" class="layer">Backend Services</text>
+  <rect x="80" y="770" width="560" height="220" class="node" />
+  <text x="120" y="840" class="label">Django REST API</text>
+  <text x="120" y="875" class="small">Tasks, users, payments, recommendations</text>
+
+  <rect x="340" y="840" width="260" height="120" class="node" />
+  <text x="370" y="900" class="label">Django Channels</text>
+  <text x="370" y="935" class="small">WebSocket layer</text>
+
+  <text x="880" y="200" class="layer">Data &amp; Integrations</text>
+  <rect x="880" y="230" width="840" height="760" class="dash" />
+
+  <rect x="940" y="280" width="320" height="150" class="node" />
+  <text x="980" y="345" class="label">PostgreSQL</text>
+  <text x="980" y="380" class="small">Primary database</text>
+
+  <rect x="940" y="500" width="320" height="150" class="node" />
+  <text x="980" y="565" class="label">Stripe Connect</text>
+  <text x="980" y="600" class="small">Escrow + payouts</text>
+
+  <rect x="940" y="720" width="320" height="150" class="node" />
+  <text x="980" y="785" class="label">Google Gemini</text>
+  <text x="980" y="820" class="small">AI chatbot</text>
+
+  <rect x="1320" y="360" width="340" height="150" class="node" />
+  <text x="1360" y="425" class="label">Email Provider</text>
+  <text x="1360" y="460" class="small">Verification + resets</text>
+
+  <rect x="1320" y="620" width="340" height="150" class="node" />
+  <text x="1360" y="685" class="label">Object Storage</text>
+  <text x="1360" y="720" class="small">Media + uploads</text>
+
+  <path d="M360 410 L360 500" class="line" />
+  <path d="M360 680 L360 770" class="line" />
+  <path d="M640 860 L940 355" class="line" />
+  <path d="M640 860 L940 575" class="line" />
+  <path d="M640 860 L940 795" class="line" />
+  <path d="M640 820 L1320 435" class="line" />
+  <path d="M640 820 L1320 695" class="line" />
+</svg>

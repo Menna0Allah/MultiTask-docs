@@ -1,0 +1,78 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0b1220"/>
+      <stop offset="100%" stop-color="#151f33"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1f2a44"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <style>
+      .title { font: 700 44px "Segoe UI", Arial, sans-serif; fill: #f8fafc; }
+      .subtitle { font: 500 20px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+      .lane { font: 600 18px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; letter-spacing: 1px; }
+      .node { fill: url(#panel); stroke: #8fa3bf; stroke-width: 2.2; rx: 16; ry: 16; }
+      .label { font: 600 21px "Segoe UI", Arial, sans-serif; fill: #e2e8f0; }
+      .small { font: 500 17px "Segoe UI", Arial, sans-serif; fill: #cbd5e1; }
+      .line { stroke: #cbd5e1; stroke-width: 2.3; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #94a3b8; stroke-width: 1.8; stroke-dasharray: 8 6; fill: none; }
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6" fill="#cbd5e1" />
+    </marker>
+  </defs>
+
+  <rect width="1800" height="1100" fill="url(#bg)" />
+  <text x="80" y="90" class="title">Realtime Messaging &amp; Notifications</text>
+  <text x="80" y="130" class="subtitle">JWT‑authenticated WebSocket flow with persistence and fanout</text>
+
+  <text x="80" y="190" class="lane">CLIENTS</text>
+  <rect x="80" y="220" width="340" height="140" class="node" />
+  <text x="120" y="285" class="label">Sender App</text>
+  <text x="120" y="320" class="small">Connect + send event</text>
+
+  <rect x="80" y="420" width="340" height="140" class="node" />
+  <text x="120" y="485" class="label">Receiver App</text>
+  <text x="120" y="520" class="small">Subscribed to room</text>
+
+  <text x="480" y="190" class="lane">EDGE + REALTIME</text>
+  <rect x="480" y="220" width="420" height="180" class="node" />
+  <text x="520" y="285" class="label">WebSocket Gateway</text>
+  <text x="520" y="320" class="small">JWT handshake + routing</text>
+  <text x="520" y="350" class="small">/ws/chat/:id • /ws/notifications</text>
+
+  <rect x="480" y="470" width="420" height="180" class="node" />
+  <text x="520" y="535" class="label">Django Channels</text>
+  <text x="520" y="570" class="small">Auth • groups • fanout</text>
+  <text x="520" y="600" class="small">Ack + delivery events</text>
+
+  <text x="980" y="190" class="lane">SERVICES</text>
+  <rect x="980" y="240" width="340" height="160" class="node" />
+  <text x="1020" y="305" class="label">Messaging Service</text>
+  <text x="1020" y="340" class="small">Persist + business rules</text>
+
+  <rect x="980" y="500" width="340" height="160" class="node" />
+  <text x="1020" y="565" class="label">Notification Service</text>
+  <text x="1020" y="600" class="small">Unread counts + alerts</text>
+
+  <text x="1400" y="190" class="lane">DATA</text>
+  <rect x="1360" y="340" width="360" height="200" class="node" />
+  <text x="1400" y="410" class="label">PostgreSQL</text>
+  <text x="1400" y="445" class="small">Messages + notifications</text>
+  <text x="1400" y="475" class="small">Delivery state</text>
+
+  <rect x="980" y="760" width="740" height="200" class="dash" />
+  <text x="1000" y="820" class="label">Consistency Strategy</text>
+  <text x="1000" y="855" class="small">Persist before broadcast</text>
+  <text x="1000" y="885" class="small">Clients re‑fetch on reconnect</text>
+  <text x="1000" y="915" class="small">Authorization scoped to participants</text>
+
+  <path d="M420 290 L480 290" class="line" />
+  <path d="M690 400 L690 470" class="line" />
+  <path d="M900 320 L980 320" class="line" />
+  <path d="M900 580 L980 580" class="line" />
+  <path d="M1320 340 L1360 430" class="line" />
+  <path d="M1320 600 L1360 470" class="line" />
+  <path d="M480 560 L420 560" class="line" />
+</svg>

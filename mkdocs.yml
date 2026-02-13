@@ -1,0 +1,22 @@
+site_name: MultiTask Docs
+site_description: Product and architecture documentation for MultiTask
+repo_name: multitask-docs
+repo_url: https://github.com/Menna0Allah/MultiTask-docs
+nav:
+  - Overview: index.md
+  - Architecture: architecture.md
+  - Features: features.md
+  - Screenshots: screenshots.md
+  - API: api.md
+  - Realtime: realtime.md
+  - Payments: payments.md
+  - Security: security.md
+  - Quickstart: quickstart.md
+theme:
+  name: material
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.superfences
