@@ -4,6 +4,22 @@ A comprehensive task marketplace platform connecting clients with freelancers, b
 
 ---
 
+## Product Screens
+
+| Home | Dashboard |
+|------|-----------|
+| ![Home](assets/screenshots/start-hero-page.png) | ![Dashboard](assets/screenshots/dashboard-page.png) |
+
+| Task Details | Messages |
+|--------------|----------|
+| ![Task Details](assets/screenshots/first-part-specific-task-page.png) | ![Messages](assets/screenshots/messages-conversation-page.png) |
+
+| Wallet | Notifications |
+|--------|---------------|
+| ![Wallet](assets/screenshots/wallet-page.png) | ![Notifications](assets/screenshots/notifications-page.png) |
+
+---
+
 ## Table of Contents
 
 1. [Overview](#overview)
