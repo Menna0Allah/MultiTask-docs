@@ -17,13 +17,11 @@ Public, portfolio‑ready documentation for the MultiTask platform. This reposit
 - Serve as a reference for reviewers, collaborators, and anyone interested in the platform.
 
 ## Source of Truth
-`DOCUMENTATION.md` is the canonical source. All pages in `docs/` are derived or reorganized from it and must remain consistent.
+`README.md` and the pages in `docs/` are the maintained documentation sources in this repository.
 
 ## Repository Structure (How Everything Relates)
-- `DOCUMENTATION.md`  
-  Canonical full documentation. If anything changes, update this file first.
 - `docs/`  
-  Public site pages built from the canonical document. Each page is a focused slice of `DOCUMENTATION.md`.
+  Public site pages for architecture, features, API, security, and setup.
   - `docs/index.md` — Overview and high‑level product snapshots.
   - `docs/architecture.md` — Diagrams and architectural flows.
   - `docs/features.md` — User roles and feature inventory.
@@ -50,16 +48,15 @@ mkdocs serve
 ```
 
 ## Publish to GitHub Pages
-This repo is configured to deploy automatically via GitHub Actions on push to `main` or `master`.
+Deployment is manual.
 
 Setup steps:
 1. Update `repo_url` in `mkdocs.yml` with your real GitHub repo URL.
-2. In GitHub: Settings → Pages → Source: “GitHub Actions”.
-3. Push to `main` (or `master`) to trigger deployment.
+2. Build the site locally with `mkdocs build`.
+3. Publish the generated site manually to your preferred Pages branch or hosting target.
 
 ## Contribution / Update Rules
-- Update `DOCUMENTATION.md` first.
-- Propagate changes into the relevant `docs/*.md` pages.
+- Keep `README.md` and `docs/*.md` consistent.
 - Add or update diagrams in `assets/diagrams/` if flows change.
 - Add or update screenshots in `assets/screenshots/` and keep `docs/screenshots.md` current.
 
