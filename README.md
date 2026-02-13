@@ -1,5 +1,11 @@
 # MultiTask Platform Documentation
 
+## Source Code Access
+
+Original source code repository: [MultiTask](https://github.com/Menna0Allah/MultiTask.git)
+
+Note: If you want to review the full source code, send an access request and I will accept it.
+
 A comprehensive task marketplace platform connecting clients with freelancers, built with Django REST Framework (Backend) and React + Vite (Frontend).
 
 ---

@@ -1,6 +1,12 @@
 
 # MultiTask Documentation
 
+## Source Code Access
+
+Original source code repository: [MultiTask](https://github.com/Menna0Allah/MultiTask.git)
+
+Note: If you want to review the full source code, send an access request and I will accept it.
+
 [![Docs](https://img.shields.io/badge/Docs-Live-brightgreen)](https://menna0allah.github.io/MultiTask-docs/)
 
 Public, portfolio‑ready documentation for the MultiTask platform. This repository exists because the private source‑code repository contains sensitive information and cannot be made public. Everything here is intentionally sanitized and safe to share while still providing a complete, professional view of the product.
